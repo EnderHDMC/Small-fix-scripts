@@ -31,9 +31,11 @@ if [ "$UNAME" == "Darwin" ]; then
 	open -a Terminal ./StardewModdingAPI.bin.osx $@
 else
 	# check if "--disable-smapi" argument was passed (checks all arguments)
-	if [[ "${@#--disable-smapi}" == "$@" ]]; then
-		# if it doesn't find "--disable-smapi" then it executes this code
-		# launches smapi
+	if [[ $@ =~ "--disable-smapi" ]]; then
+		# launch vanilla Stardew Valley
+		./StardewValley-original $@
+	else
+		# launch smapi
 
 		# choose launcher
 		LAUNCHER=""
@@ -48,8 +50,10 @@ else
 		fi
 
 		# check if "--disable-console" argument was passed (checks all arguments)
-		if [[ "${@#--disable-console}" == "$@" ]]; then
-			# if it doesn't find "--disable-console" then it executes this code
+		if [[ $@ =~ --disable-terminal ]]; then
+			# launch SMAPI without terminal to bypass a bug where steam does not launch the game when using terminal
+			$LAUNCHER
+		else
 			# launch SMAPI normally (with terminal)
 
 			# get cross-distro version of POSIX command
@@ -74,14 +78,6 @@ else
 			else
 				$LAUNCHER
 			fi
-		else
-			# if it does find "--disable-console" then it executes this code
-			# launch SMAPI without terminal to bypass a bug where steam does not launch the game when using terminal
-			$LAUNCHER
 		fi
-	else
-		# if it does find "--disable-smapi" then it executes this code
-		# launch vanilla Stardew Valley
-		./StardewValley-original $@
 	fi
 fi
