@@ -1,7 +1,7 @@
 #!/bin/bash
 # MonoKickstart Shell Script
 # Written by Ethan "flibitijibibo" Lee
-# Modified for StardewModdingAPI by Viz and Pathoschild
+# Modified for StardewModdingAPI by Viz, Pathoschild and EnderHDMC
 
 # Move to script's directory
 cd "`dirname "$0"`"
