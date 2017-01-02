@@ -72,8 +72,9 @@ else
 		fi
 
 		# check for error 127 (command not found) and fallback to running SMAPI without terminal
-		if [ "$?" == "127" ]; then
-		$LAUNCHER --disable-terminal
+		# this is to fix an error that some Linux users were having where Steam would not run the game with a terminal
+		if [ $? -eq 127 ]; then
+		$LAUNCHER --no-terminal
 		fi
 	fi
 fi
